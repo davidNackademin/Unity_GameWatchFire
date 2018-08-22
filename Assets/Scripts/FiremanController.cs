@@ -21,8 +21,6 @@ public class FiremanController : MonoBehaviour {
         Input.OnRightPressed -= Input_OnRightPressed;
     }
 
-
-
     private void Start()
     {
         transform.position = positions[currentPosition].position;
@@ -35,8 +33,6 @@ public class FiremanController : MonoBehaviour {
             currentPosition--;
             transform.position = positions[currentPosition].position;
         }
-           
-        Debug.Log("Left pressed!");
     }
 
     void Input_OnRightPressed()
@@ -45,9 +41,6 @@ public class FiremanController : MonoBehaviour {
             currentPosition++;
             transform.position = positions[currentPosition].position;
         }
-
-
-        Debug.Log("Right pressed!");
     }
 
 }
