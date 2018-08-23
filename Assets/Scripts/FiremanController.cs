@@ -6,6 +6,7 @@ public class FiremanController : MonoBehaviour {
 
     public List<Transform> positions = new List<Transform>();
 
+
     int currentPosition = 0;
 
 
