@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class JumperController : MonoBehaviour {
 
-    public List<Transform> positions = new List<Transform>();
+    public GameManager gameManager;
+    public List<GameObject> positions = new List<GameObject>();
     int currentPosition = 0;
     public float moveDelay = 0.5f;
     float lastMoveTime;
 
 	// Use this for initialization
 	void Start () {
-        transform.position = positions[currentPosition].position;
+        transform.position = positions[currentPosition].transform.position;
         lastMoveTime = Time.time;
 
         StartCoroutine(Move());
@@ -40,10 +41,21 @@ public class JumperController : MonoBehaviour {
         if (currentPosition >= positions.Count)
             currentPosition = 0;
 
-        transform.position = positions[currentPosition].position;
+        transform.position = positions[currentPosition].transform.position;
 
         lastMoveTime = Time.time;
+
+
+        if(positions[currentPosition].GetComponent<JumperPosition>().dangerPosition) {
+            if (gameManager.Crash(gameObject)) {
+                Debug.Log("Crash!!!");
+
+            } else {
+
+                Debug.Log("Continue!");
+            }
+
+
+        }
     }
-
-
 }
