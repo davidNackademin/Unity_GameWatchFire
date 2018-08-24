@@ -21,7 +21,7 @@ public class JumperController : MonoBehaviour {
     IEnumerator Move() {
         while(true) {
             yield return new WaitForSeconds(moveDelay);
-            MoveToNextPosition();
+            StartCoroutine( MoveToNextPosition());
         }
     }
 
@@ -35,7 +35,7 @@ public class JumperController : MonoBehaviour {
  //       }
 	//}
 
-    void MoveToNextPosition() {
+    IEnumerator MoveToNextPosition() {
         currentPosition++;
 
         if (currentPosition >= positions.Count)
@@ -45,17 +45,24 @@ public class JumperController : MonoBehaviour {
 
         lastMoveTime = Time.time;
 
+        // wait one frame until crash check is done so physics is calculated
+        yield return null;
 
         if(positions[currentPosition].GetComponent<JumperPosition>().dangerPosition) {
             if (gameManager.Crash(gameObject)) {
-                Debug.Log("Crash!!!");
-
+                Die();
             } else {
 
-                Debug.Log("Continue!");
+             //   Debug.Log("Continue!");
             }
 
 
         }
     }
+
+    void Die() {
+        Destroy(transform.parent.gameObject);
+
+    }
+
 }
