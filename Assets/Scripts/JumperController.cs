@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class JumperController : MonoBehaviour {
 
+    [HideInInspector]
     public GameManager gameManager;
-    public List<GameObject> positions = new List<GameObject>();
+    //  public List<GameObject> positions = new List<GameObject>();
+    public Transform positions;
+
     int currentPosition = 0;
     public float moveDelay = 0.5f;
     float lastMoveTime;
 
 	// Use this for initialization
 	void Start () {
-        transform.position = positions[currentPosition].transform.position;
+        transform.position = positions.GetChild(currentPosition).transform.position;
         lastMoveTime = Time.time;
 
         StartCoroutine(Move());
@@ -38,17 +41,17 @@ public class JumperController : MonoBehaviour {
     IEnumerator MoveToNextPosition() {
         currentPosition++;
 
-        if (currentPosition >= positions.Count)
+        if (currentPosition >= positions.childCount)
             currentPosition = 0;
 
-        transform.position = positions[currentPosition].transform.position;
+        transform.position = positions.GetChild(currentPosition).transform.position;
 
         lastMoveTime = Time.time;
 
         // wait one frame until crash check is done so physics is calculated
         yield return null;
 
-        if(positions[currentPosition].GetComponent<JumperPosition>().dangerPosition) {
+        if(positions.GetChild(currentPosition).GetComponent<JumperPosition>().dangerPosition) {
             if (gameManager.Crash(gameObject)) {
                 Die();
             } else {
