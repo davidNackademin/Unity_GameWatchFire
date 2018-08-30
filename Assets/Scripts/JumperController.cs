@@ -32,7 +32,11 @@ public class JumperController : MonoBehaviour {
         currentPosition++;
 
         if (currentPosition >= positions.childCount)
+        {
             currentPosition = 0;
+            gameManager.JumperSaved();
+            Die();
+        }
 
         transform.position = positions.GetChild(currentPosition).transform.position;
 

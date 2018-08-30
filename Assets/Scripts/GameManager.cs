@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public GameObject jumperPrefab;
     public GameObject fireman;
     public LifeViewController lifeController;
+    public PointsController pointsController;
 
     Collider2D firemanCollider;
 
@@ -26,12 +27,15 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void JumperSaved() {
+        pointsController.AddPoint();
+    }
+
     public bool Crash(GameObject jumper) {
 
         LayerMask mask = LayerMask.GetMask("Fireman");
         RaycastHit2D hit = Physics2D.Raycast(jumper.transform.position, Vector2.down, Mathf.Infinity, mask);
         if ( hit.collider != null) {
-            Debug.Log("Collision: " + hit.collider.gameObject.name);
             return false;
         }
         else {
