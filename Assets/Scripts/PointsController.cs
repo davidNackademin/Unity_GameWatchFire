@@ -6,13 +6,13 @@ using TMPro;
 public class PointsController : MonoBehaviour {
 
     TextMeshPro textMesh;
-    int points = 0;
+    //int points = 0;
 
     private void Start()
     {
         textMesh = GetComponent<TextMeshPro>();
 
-        textMesh.SetText(points.ToString());
+        textMesh.SetText("0");
 
         if(textMesh == null) {
             Debug.LogError("Textmesh component not found!");
@@ -20,11 +20,8 @@ public class PointsController : MonoBehaviour {
     }
 
 
-    public void AddPoint() {
-        points++;
+    public void SetPoint(int points) {
         textMesh.SetText(points.ToString());
-
-
 
     }
 

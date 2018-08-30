@@ -9,7 +9,9 @@ public class JumperController : MonoBehaviour {
     public Transform positions;
 
     int currentPosition = 0;
-    public float moveDelay = 0.5f;
+
+    [HideInInspector]
+    public float moveDelay;
     float lastMoveTime;
 
 	// Use this for initialization

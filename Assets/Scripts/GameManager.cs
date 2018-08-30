@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour {
     public GameObject fireman;
     public LifeViewController lifeController;
     public PointsController pointsController;
+    public float spawnDelay = 5.0f;
+    public float moveDelay = 0.5f;
+
+
+    bool continueGame = true;
+    int points = 0;
 
     Collider2D firemanCollider;
 
@@ -17,18 +23,30 @@ public class GameManager : MonoBehaviour {
         firemanCollider = fireman.GetComponentInChildren<Collider2D>();
 
         lifeController.RestoreAllLives();
-        NewJumper();
 
+        StartCoroutine(JumperSpawner());
 	}
 
-    void NewJumper() {
+    IEnumerator JumperSpawner() {
+        while(continueGame) {
+            NewJumper(moveDelay - (0.02f * points));
+            yield return new WaitForSeconds(spawnDelay - (0.1f * points) );
+        }
+    }
+
+
+
+    void NewJumper(float delay) {
         GameObject newJumper = Instantiate(jumperPrefab);
-        newJumper.GetComponentInChildren<JumperController>().gameManager = this;
+        JumperController jumperController = newJumper.GetComponentInChildren<JumperController>();
+        jumperController.gameManager = this;
+        jumperController.moveDelay = delay;
 
     }
 
     public void JumperSaved() {
-        pointsController.AddPoint();
+        points++;
+        pointsController.SetPoint(points);
     }
 
     public bool Crash(GameObject jumper) {
@@ -44,16 +62,12 @@ public class GameManager : MonoBehaviour {
        } 
     }
 
-    void LoseOneLife() {
-        
-        if (!lifeController.RemoveLife() )
+    void LoseOneLife()
+    {
+        if (!lifeController.RemoveLife())
         {
             Debug.Log("Game Over!");
-        }
-        else
-        {
-            NewJumper();
+            continueGame = false;
         }
     }
-
 }

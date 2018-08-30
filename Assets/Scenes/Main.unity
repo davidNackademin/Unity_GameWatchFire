@@ -416,6 +416,8 @@ MonoBehaviour:
   fireman: {fileID: 85373484}
   lifeController: {fileID: 1274662778}
   pointsController: {fileID: 260588124}
+  spawnDelay: 6
+  moveDelay: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
