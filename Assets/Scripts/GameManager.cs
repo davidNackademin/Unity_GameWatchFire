@@ -10,12 +10,6 @@ public class GameManager : MonoBehaviour {
 
     Collider2D firemanCollider;
 
-    //[SerializeField]
-    //private int lives = 10;
-
-   // Collider2D tempJumperCollider;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -26,34 +20,18 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-    //private void Update()
-    //{
-    //    if (firemanCollider.IsTouching(tempJumperCollider)){
-    //        fireman.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-    //    } else {
-    //        fireman.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-
-    //    }
-    //}
-
     void NewJumper() {
         GameObject newJumper = Instantiate(jumperPrefab);
         newJumper.GetComponentInChildren<JumperController>().gameManager = this;
 
     }
 
-
     public bool Crash(GameObject jumper) {
 
-        Collider2D jumperCollider = jumper.GetComponent<Collider2D>();
-
-        if (jumperCollider == null || firemanCollider == null)
-        {
-            Debug.Log("collider not found");
-        }
-
-        if( jumperCollider.IsTouching(firemanCollider)){
-            
+        LayerMask mask = LayerMask.GetMask("Fireman");
+        RaycastHit2D hit = Physics2D.Raycast(jumper.transform.position, Vector2.down, Mathf.Infinity, mask);
+        if ( hit.collider != null) {
+            Debug.Log("Collision: " + hit.collider.gameObject.name);
             return false;
         }
         else {

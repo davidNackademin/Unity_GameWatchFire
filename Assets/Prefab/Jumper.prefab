@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 4658286432279378}
   - component: {fileID: 212005728700090056}
   - component: {fileID: 114166733251414446}
-  - component: {fileID: 61791618703043228}
   m_Layer: 0
   m_Name: Jumper
   m_TagString: Untagged
@@ -400,31 +399,6 @@ Transform:
   m_Father: {fileID: 4728669480625782}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
---- !u!61 &61791618703043228
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1933906211620512}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.6530347}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.3060694}
-  m_EdgeRadius: 0
 --- !u!114 &114029514042083860
 MonoBehaviour:
   m_ObjectHideFlags: 1
