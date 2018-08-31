@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Input : MonoBehaviour {
+public class InputButtons : MonoBehaviour {
 
     public delegate void ButtonPressed();
     public static event ButtonPressed OnLeftPressed;
