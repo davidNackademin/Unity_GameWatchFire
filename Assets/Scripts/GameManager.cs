@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+    
+    private static GameManager _instance;
+
+    public static GameManager Instance { get { return _instance;  }}
 
     public GameObject jumperPrefab;
     public GameObject fireman;
@@ -18,8 +22,16 @@ public class GameManager : MonoBehaviour {
     Collider2D firemanCollider;
 
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        if (Instance != null && _instance != this)
+            Destroy(gameObject);
+        else
+            _instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         firemanCollider = fireman.GetComponentInChildren<Collider2D>();
 
         lifeController.RestoreAllLives();
@@ -39,7 +51,7 @@ public class GameManager : MonoBehaviour {
     void NewJumper(float delay) {
         GameObject newJumper = Instantiate(jumperPrefab);
         JumperController jumperController = newJumper.GetComponentInChildren<JumperController>();
-        jumperController.gameManager = this;
+      //  jumperController.gameManager = this;
         jumperController.moveDelay = delay;
 
     }

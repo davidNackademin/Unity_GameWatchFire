@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JumperController : MonoBehaviour {
-
-    [HideInInspector]
-    public GameManager gameManager;
+    
     public Transform positions;
 
     int currentPosition = 0;
@@ -36,7 +34,7 @@ public class JumperController : MonoBehaviour {
         if (currentPosition >= positions.childCount)
         {
             currentPosition = 0;
-            gameManager.JumperSaved();
+            GameManager.Instance.JumperSaved();
             Die();
         }
 
@@ -45,7 +43,7 @@ public class JumperController : MonoBehaviour {
         lastMoveTime = Time.time;
 
         if(positions.GetChild(currentPosition).GetComponent<JumperPosition>().dangerPosition) {
-            if (gameManager.Crash(gameObject)) {
+            if (GameManager.Instance.Crash(gameObject)) {
                 Die();
             } 
         }
