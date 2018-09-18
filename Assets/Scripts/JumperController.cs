@@ -12,11 +12,15 @@ public class JumperController : MonoBehaviour {
     public float moveDelay;
     float lastMoveTime;
 
-	// Use this for initialization
-	void Start () {
+
+
+    // Use this for initialization
+    private void OnEnable()
+    {
+        
         transform.position = positions.GetChild(currentPosition).transform.position;
         lastMoveTime = Time.time;
-
+        currentPosition = 0;
         StartCoroutine(Move());
 	}
 	
@@ -50,7 +54,8 @@ public class JumperController : MonoBehaviour {
     }
 
     void Die() {
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
+        transform.parent.gameObject.SetActive(false);
 
     }
 
